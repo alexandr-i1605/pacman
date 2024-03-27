@@ -401,3 +401,7 @@ FodyWeavers.xsd
 *build
 *cmake-build-debug
 *main.dSYM
+
+SFML/
+lib/
+CMakeSettings.json
