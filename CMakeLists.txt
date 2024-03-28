@@ -10,11 +10,19 @@ set(${project}_SOURCE_LIST
 set(${project}_INCLUDE_LIST
         )
 
+set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR ${CMAKE_SOURCE_DIR}/extern/SFML/lib/cmake/SFML)
-find_package(SFML COMPONENTS system window graphics network audio REQUIRED)
+find_package(SFML 2.6.1 COMPONENTS system window graphics network audio REQUIRED)
+
+set(SFML_LIBS_LIST
+    sfml-system
+    sfml-window
+    sfml-graphics
+    sfml-network
+    sfml-audio)
 
 add_executable(${project}
         ${${project}_SOURCE_LIST}
         ${${project}_INCLUDE_LIST})
 
-target_link_libraries(pacman sfml-system sfml-window sfml-graphics sfml-network sfml-audio)
+target_link_libraries(${project} ${SFML_LIBS_LIST})
