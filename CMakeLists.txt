@@ -27,6 +27,7 @@ FetchContent_Declare(
 )
 
 option(SFML_BUILD_NETWORK OFF)
+option(SFML_BUILD_AUDIO OFF)
 
 set(IMGUI_DIR ${CMAKE_BINARY_DIR}/_deps/imgui-src)
 option(IMGUI_SFML_FIND_SFML OFF)
@@ -43,7 +44,6 @@ target_link_libraries(${project}
         sfml-graphics
         sfml-window
         sfml-system
-        sfml-audio
         ImGui-SFML::ImGui-SFML
 )
 
