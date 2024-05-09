@@ -43,6 +43,7 @@ target_link_libraries(${project}
         sfml-graphics
         sfml-window
         sfml-system
+        sfml-audio
         ImGui-SFML::ImGui-SFML
 )
 
