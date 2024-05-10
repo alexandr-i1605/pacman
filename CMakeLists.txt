@@ -7,15 +7,14 @@ include(FetchContent)
 set(project "pacman")
 project(${project})
 
-set(SFML_VERSION 2.5.1)
 set(IMGUI_VERSION 1.90)
 
 set(BUILD_SHARED_LIBS OFF)
 
 FetchContent_Declare(
         sfml
-        URL "https://github.com/SFML/SFML/archive/${SFML_VERSION}.zip"
-)
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG "2.6.x")
 FetchContent_Declare(
         imgui
         URL "https://github.com/ocornut/imgui/archive/v${IMGUI_VERSION}.zip"
@@ -27,7 +26,6 @@ FetchContent_Declare(
 )
 
 option(SFML_BUILD_NETWORK OFF)
-option(SFML_BUILD_AUDIO OFF)
 
 set(IMGUI_DIR ${CMAKE_BINARY_DIR}/_deps/imgui-src)
 option(IMGUI_SFML_FIND_SFML OFF)
@@ -40,7 +38,8 @@ add_executable(${project}
         ${SOURCE_LIST})
 
 target_link_libraries(${project}
-        PUBLIC  
+        PUBLIC
+        sfml-audio
         sfml-graphics
         sfml-window
         sfml-system
