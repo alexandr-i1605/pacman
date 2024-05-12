@@ -12,30 +12,7 @@ int main(){
     window.setVerticalSyncEnabled(true);
     window.setView(sf::View(sf::FloatRect(0, 0, TILE_SIZE * MAP_WIDTH, TILE_SIZE * MAP_HEIGHT)));
 
-	std::vector<std::string> map_scheme{
-		" ################### ",
-		" #        #        # ",
-		" # ## ### # ### ## # ",
-		" #                 # ",
-		" # ## # ##### # ## # ",
-		" #    #   #   #    # ",
-		" #### ### # ### #### ",
-		"    # #       # #    ",
-		"##### # ## ## # #####",
-		"        #   #        ",
-		"##### # ##### # #####",
-		"    # #       # #    ",
-		" #### # ##### # #### ",
-		" #        #        # ",
-		" # ## ### # ### ## # ",
-		" #  #           #  # ",
-		" ## # # ##### # # ## ",
-		" #    #   #   #    # ",
-		" # ###### # ###### # ",
-		" #                 # ",
-		" ################### "
-	};
-
+	Map Map;
 
     while (window.isOpen()){
         sf::Event event;
@@ -46,7 +23,7 @@ int main(){
         }
         window.clear();
 
-		draw_map(map_scheme, window);
+		Map.draw_map(window);
 
         window.display();
     }

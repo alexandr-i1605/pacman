@@ -1,6 +1,5 @@
 #include <vector>
 #include <string>
-
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
@@ -8,7 +7,7 @@
 #include "Constants.h"
 #include "map.hpp"
 
-void draw_map(std::vector<std::string>& map_scheme, sf::RenderWindow& window) {
+void Map::draw_map(sf::RenderWindow& window) {
     sf::RectangleShape wall(sf::Vector2f(TILE_SIZE, TILE_SIZE));
     wall.setFillColor(sf::Color::Blue);
 
