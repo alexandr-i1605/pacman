@@ -4,7 +4,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Constants.h"
+#include "Constants.hpp"
+#include "Actors/Pacman.hpp"
 #include "map.hpp"
 
 int main(){
@@ -13,6 +14,7 @@ int main(){
     window.setView(sf::View(sf::FloatRect(0, 0, TILE_SIZE * MAP_WIDTH, TILE_SIZE * MAP_HEIGHT)));
 
 	Map Map;
+    Pacman pacman(320, 352);
 
     while (window.isOpen()){
         sf::Event event;
@@ -24,7 +26,7 @@ int main(){
         window.clear();
 
 		Map.draw_map(window);
-
+        pacman.draw(window);
         window.display();
     }
 

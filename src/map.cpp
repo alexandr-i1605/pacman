@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Constants.h"
+#include "Constants.hpp"
 #include "map.hpp"
 
 void Map::draw_map(sf::RenderWindow& window) {
@@ -17,6 +17,7 @@ void Map::draw_map(sf::RenderWindow& window) {
             if (map_scheme[i][j] == '#') {
                 window.draw(wall);
             }
+
         }
     }
 }
