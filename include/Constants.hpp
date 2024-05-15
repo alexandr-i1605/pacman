@@ -1,9 +1,9 @@
-#pragma once 
+п»ї#pragma once 
 
-const unsigned short WINDOW_WIDTH = 900; //Ширина экрана
-const unsigned short WINDOW_HEIGHT = 900; //Высота экрана
+const unsigned short WINDOW_WIDTH = 900; //РЁРёСЂРёРЅР° СЌРєСЂР°РЅР°
+const unsigned short WINDOW_HEIGHT = 900; //Р’С‹СЃРѕС‚Р° СЌРєСЂР°РЅР°
 
-const unsigned short TILE_SIZE = 32; // Размер 1-ой плитки
+const unsigned short TILE_SIZE = 32; // Р Р°Р·РјРµСЂ 1-РѕР№ РїР»РёС‚РєРё
 
-const unsigned short MAP_WIDTH = 21; //Ширина карты в плитках
-const unsigned short MAP_HEIGHT = 21; //Высота карты в плитках
+const unsigned short MAP_WIDTH = 21; //РЁРёСЂРёРЅР° РєР°СЂС‚С‹ РІ РїР»РёС‚РєР°С…
+const unsigned short MAP_HEIGHT = 21; //Р’С‹СЃРѕС‚Р° РєР°СЂС‚С‹ РІ РїР»РёС‚РєР°С…

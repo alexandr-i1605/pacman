@@ -1,8 +1,8 @@
-#pragma once 
+п»ї#pragma once 
 
 class Map {
 private:
-	std::vector<std::string> map_scheme{ //Схема карты
+	std::vector<std::string> map_scheme{ //РЎС…РµРјР° РєР°СЂС‚С‹
 		" ################### ",
 		" #        #        # ",
 		" # ## ### # ### ## # ",
@@ -28,5 +28,6 @@ private:
 public:
 	Map() = default;
 	~Map() = default;
-	void draw_map(sf::RenderWindow& window); //Отрисовывает карту, window - на какой экран выводить
+	void draw_map(sf::RenderWindow& window); //РћС‚СЂРёСЃРѕРІС‹РІР°РµС‚ РєР°СЂС‚Сѓ, window - РЅР° РєР°РєРѕР№ СЌРєСЂР°РЅ РІС‹РІРѕРґРёС‚СЊ
+	bool check_collision(short next_X, short next_Y);
 };

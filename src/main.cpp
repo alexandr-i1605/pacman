@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include <string>
 
@@ -13,7 +13,7 @@ int main(){
     window.setVerticalSyncEnabled(true);
     window.setView(sf::View(sf::FloatRect(0, 0, TILE_SIZE * MAP_WIDTH, TILE_SIZE * MAP_HEIGHT)));
 
-	Map Map;
+	Map map;
     Pacman pacman(320, 352);
 
     while (window.isOpen()){
@@ -25,8 +25,8 @@ int main(){
         }
         window.clear();
 
-		Map.draw_map(window);
-        pacman.movement();
+		map.draw_map(window);
+        pacman.movement(map);
         pacman.draw(window);
         window.display();
     }
