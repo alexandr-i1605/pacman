@@ -26,6 +26,7 @@ int main(){
         window.clear();
 
 		Map.draw_map(window);
+        pacman.movement();
         pacman.draw(window);
         window.display();
     }

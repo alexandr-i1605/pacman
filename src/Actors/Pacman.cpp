@@ -12,7 +12,42 @@ Pacman::Pacman(short x, short y, short direction, short speed) {
 }
 
 void Pacman::movement() {
-	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		_direction = 0;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		_direction = 1;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		_direction = 2;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		_direction = 3;
+	}
+
+	switch (_direction) {
+	case 0:
+	{
+		_position_y -= _speed;
+		break;
+	}
+	case 1:
+	{
+		_position_x += _speed;
+		break;
+	}
+	case 2:
+	{
+		_position_y += _speed;
+		break;
+	}
+	case 3:
+	{
+		_position_x -= _speed;
+
+		break;
+	}
+	}
 }
 
 void Pacman::draw(sf::RenderWindow& window) {
