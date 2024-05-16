@@ -65,11 +65,11 @@ void Pacman::movement(Map& map) {
 		}
 	}
 
-	if (_position.x <= -TILE_SIZE + 1) {
-		_position.x = TILE_SIZE * MAP_WIDTH - 1;
+	if (_position.x <= -TILE_SIZE) {
+		_position.x = TILE_SIZE * MAP_WIDTH - 2;
 	}
-	else if (_position.x >= TILE_SIZE * MAP_WIDTH - 1) {
-		_position.x = 1 - TILE_SIZE;
+	else if (_position.x >= TILE_SIZE * MAP_WIDTH) {
+		_position.x =-TILE_SIZE + 2;
 	}
 }
 
