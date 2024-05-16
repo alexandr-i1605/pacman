@@ -64,6 +64,13 @@ void Pacman::movement(Map& map) {
 		}
 		}
 	}
+
+	if (_position.x <= -TILE_SIZE + 1) {
+		_position.x = TILE_SIZE * MAP_WIDTH - 1;
+	}
+	else if (_position.x >= TILE_SIZE * MAP_WIDTH - 1) {
+		_position.x = 1 - TILE_SIZE;
+	}
 }
 
 void Pacman::draw(sf::RenderWindow& window) {
