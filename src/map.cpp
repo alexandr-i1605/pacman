@@ -10,14 +10,19 @@
 void Map::draw_map(sf::RenderWindow& window) {
     sf::RectangleShape wall(sf::Vector2f(TILE_SIZE, TILE_SIZE));
     wall.setFillColor(sf::Color::Blue);
+	sf::CircleShape pill(4);
+
 
     for (int i = 0; i < map_scheme.size(); i++) {
         for (int j = 0; j < map_scheme[i].size(); j++) {
             wall.setPosition(j * TILE_SIZE, i * TILE_SIZE);
+			pill.setPosition(j * TILE_SIZE + TILE_SIZE / 2 - 4, i * TILE_SIZE + TILE_SIZE / 2 - 4);
             if (map_scheme[i][j] == '#') {
                 window.draw(wall);
             }
-
+			if (map_scheme[i][j] == '*') {
+				window.draw(pill);
+			}
         }
     }
 }
@@ -58,11 +63,19 @@ bool Map::check_collision(short next_X, short next_Y) { //true - если ест
 		}
 
 		if (x >= 0 && 0 <= y && y < MAP_HEIGHT && MAP_WIDTH > x) {
-		if (map_scheme[y][x] == '#')
-		{
-			return true;
+			if (map_scheme[y][x] == '*') {
+				map_scheme[y][x] = ' ';
+				_pills_counter -= 1;
+				std::cout << y << " " << x << " " << _pills_counter << std::endl;
+			}
+			if (map_scheme[y][x] == '#') {
+				return true;
+			}
+			
+
 		}
-		}
+
+
 	}
 	return false;
 }
