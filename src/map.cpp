@@ -91,3 +91,11 @@ void Map::collect_manager(short next_X, short next_Y, short direction) {
 		}
 	}
 }
+
+short Map::get_pills() {
+	return _pills_counter;
+}
+
+short Map::get_boost_pills() {
+	return _boost_pills_counter;
+}
