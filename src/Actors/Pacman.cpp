@@ -16,7 +16,7 @@ void Pacman::movement(Map& map) {
 
 	std::vector<bool> collisions(4);
 	collisions[0] = map.check_collision(_position.x, _position.y - _speed);
-	collisions[1] = map.check_collision(_position.x + _speed, _position.y );
+	collisions[1] = map.check_collision(_position.x + _speed, _position.y);
 	collisions[2] = map.check_collision(_position.x, _position.y + _speed);
 	collisions[3] = map.check_collision(_position.x - _speed,  _position.y);
 
@@ -64,6 +64,7 @@ void Pacman::movement(Map& map) {
 		}
 		}
 	}
+	map.collect_manager(_position.x, _position.y, _direction);
 
 	if (_position.x <= -TILE_SIZE) {
 		_position.x = TILE_SIZE * MAP_WIDTH - 2;
