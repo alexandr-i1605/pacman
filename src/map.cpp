@@ -11,17 +11,22 @@ void Map::draw_map(sf::RenderWindow& window) {
     sf::RectangleShape wall(sf::Vector2f(TILE_SIZE, TILE_SIZE));
     wall.setFillColor(sf::Color::Blue);
 	sf::CircleShape pill(4);
+	sf::CircleShape boost_pill(8);
 
 
     for (int i = 0; i < map_scheme.size(); i++) {
         for (int j = 0; j < map_scheme[i].size(); j++) {
             wall.setPosition(j * TILE_SIZE, i * TILE_SIZE);
 			pill.setPosition(j * TILE_SIZE + TILE_SIZE / 2 - 4, i * TILE_SIZE + TILE_SIZE / 2 - 4);
+			boost_pill.setPosition(j * TILE_SIZE + TILE_SIZE / 2 - 8, i * TILE_SIZE + TILE_SIZE / 2 - 8);
             if (map_scheme[i][j] == '#') {
                 window.draw(wall);
             }
-			if (map_scheme[i][j] == '*') {
+			else if (map_scheme[i][j] == '*') {
 				window.draw(pill);
+			}
+			else if (map_scheme[i][j] == '@') {
+				window.draw(boost_pill);
 			}
         }
     }
@@ -89,5 +94,17 @@ void Map::collect_manager(short next_X, short next_Y, short direction) {
 			map_scheme[y][x] = ' ';
 			_pills_counter -= 1;
 		}
+		else if (map_scheme[y][x] == '@') {
+			map_scheme[y][x] = ' ';
+			_boost_pills_counter -= 1;
+		}
 	}
+}
+
+short Map::get_pills() {
+	return _pills_counter;
+}
+
+short Map::get_boost_pills() {
+	return _boost_pills_counter;
 }
