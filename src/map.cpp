@@ -34,7 +34,7 @@ bool Map::check_collision(short next_X, short next_Y) { //true - если ест
 	for (short i = 0; i < 4; i++) {
 		short x = 0;
 		short y = 0;
-
+		
 		switch (i) {
 		case 0:
 		{
@@ -63,19 +63,31 @@ bool Map::check_collision(short next_X, short next_Y) { //true - если ест
 		}
 
 		if (x >= 0 && 0 <= y && y < MAP_HEIGHT && MAP_WIDTH > x) {
-			if (map_scheme[y][x] == '*') {
-				map_scheme[y][x] = ' ';
-				_pills_counter -= 1;
-				std::cout << y << " " << x << " " << _pills_counter << std::endl;
-			}
 			if (map_scheme[y][x] == '#') {
 				return true;
 			}
-			
-
 		}
-
-
 	}
 	return false;
+}
+
+void Map::collect_manager(short next_X, short next_Y, short direction) {
+	float current_x = next_X / float(TILE_SIZE);
+	float current_y = next_Y / float(TILE_SIZE);
+	short x = 0;
+	short y = 0;
+	if (direction == 0 || direction == 3) {
+		x = ceil(current_x);
+		y = ceil(current_y);
+	}
+	else {
+		x = floor(current_x);
+		y = floor(current_y);
+	}
+	if (x >= 0 && 0 <= y && y < MAP_HEIGHT && MAP_WIDTH > x) {
+		if (map_scheme[y][x] == '*') {
+			map_scheme[y][x] = ' ';
+			_pills_counter -= 1;
+		}
+	}
 }
