@@ -11,7 +11,7 @@
 int main(){
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "pacman");
     window.setVerticalSyncEnabled(false);
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(120);
     window.setView(sf::View(sf::FloatRect(0, 0, TILE_SIZE * MAP_WIDTH, TILE_SIZE * MAP_HEIGHT)));
 
 	Map map;
