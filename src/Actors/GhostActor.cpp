@@ -96,10 +96,7 @@ void Ghost::movement(Map& map, Position pacman) {
 		GhostGetTarget(_door_cord, collisions);
 		if (get_dist_targ(_door_cord.x, _door_cord.y) == 0) {
 			_door = 0;
-			//if (player.getGlobalBounds().intersects(thing.getGlobalBounds()))
-			//{
-			//	// player and thing is collided! do something
-			//}
+			
 		}
 	}
 	else {

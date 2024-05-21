@@ -14,6 +14,6 @@ public:
 	BaseActor() = default;
 	void set_position(short x, short y);
 	Position get_position();
-	virtual void movement(Map& map) = 0;
+	void movement(Map& map);
 	virtual void draw(sf::RenderWindow& window) = 0;
 };
