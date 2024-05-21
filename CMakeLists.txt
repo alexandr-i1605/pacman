@@ -33,6 +33,7 @@ option(IMGUI_SFML_FIND_SFML OFF)
 FetchContent_MakeAvailable(sfml imgui imgui-sfml)
 
 file(GLOB_RECURSE SOURCE_LIST "src/*.cpp")
+file(COPY res DESTINATION ${CMAKE_BINARY_DIR})
 
 add_executable(${project}
         ${SOURCE_LIST})

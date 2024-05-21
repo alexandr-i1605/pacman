@@ -1,4 +1,5 @@
 ﻿#include <vector>
+#include <cmath>
 #include <SFML/Graphics.hpp>
 
 #include "Constants.hpp"
@@ -75,8 +76,18 @@ void Pacman::movement(Map& map) {
 }
 
 void Pacman::draw(sf::RenderWindow& window) {
-	sf::CircleShape circle(TILE_SIZE/2);
-	circle.setFillColor(sf::Color::Yellow);
-	circle.setPosition(_position.x, _position.y);
-	window.draw(circle);
+	sf::Sprite PacSprite;
+	sf::Texture PacTexture;
+	short frame = (short)(floor(_animation_time / 6));
+	PacSprite.setPosition(_position.x, _position.y);
+	_animation_time = (_animation_time + 1) % 31;
+	PacTexture.loadFromFile("res/PacMovement.png");
+	PacSprite.setTexture(PacTexture);
+	if (_direction == -1) {
+		PacSprite.setTextureRect(sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
+	}
+	else {
+		PacSprite.setTextureRect(sf::IntRect(TILE_SIZE * frame, TILE_SIZE * _direction, TILE_SIZE, TILE_SIZE));
+	}
+	window.draw(PacSprite);
 }
