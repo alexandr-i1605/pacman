@@ -29,6 +29,12 @@ int main(){
 		map.draw_map(window);
         pacman.movement(map);
         pacman.draw(window);
+<<<<<<< HEAD
+=======
+        
+        ghost.movement(map,pacman.get_position());
+        ghost.draw(window);
+>>>>>>> f263ec8 (ghost2)
         window.display();
     }
 
