@@ -28,33 +28,33 @@ float Ghost::get_dist_targ(short targetx, short targety) {
 void Ghost::GhostGetTarget(Position pacman, std::vector<bool> collisions) {
 	//bool flag = 1;
 	short tempDir = _direction;
-	if (!collisions[1] && _door == 1 && _door_cord.x != this->get_position().x - _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x - _speed, pacman.y) && (tempDir != (2 + 1) % 4)) {
-
+	if (!collisions[1] && _door_cord.x != this->get_position().x - _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x - _speed, pacman.y) && (tempDir != (2 + 1) % 4)/*&& pacman.x - _speed != _door_cord.x*/) {
+		//flag = 0;
 		_direction = 1;
 	}
-	else if (!collisions[2] && _door==1 && _door_cord.y != this->get_position().y - _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x, pacman.y - _speed) && (tempDir != (2 + 2) % 4)) {
+	else if (!collisions[2] && _door==1 && _door_cord.y != this->get_position().y - _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x, pacman.y - _speed) && (tempDir != (2 + 2) % 4)/*&& pacman.y - _speed != _door_cord.y*/) {
 		_direction = 2;
-
+		//flag = 0;
 	}
-	else if (!collisions[3] && _door == 1 && _door_cord.x != this->get_position().x + _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x + _speed, pacman.y) && (tempDir != (2 + 3) % 4)) {
+	else if (!collisions[3] && _door_cord.x != this->get_position().x + _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x + _speed, pacman.y) && (tempDir != (2 + 3) % 4)/* && pacman.x + _speed != _door_cord.x*/) {
 		_direction = 3;
-
+		//flag = 0;
 	}
-	else if (!collisions[0] && _door == 1 && _door_cord.y != this->get_position().y + _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x, pacman.y + _speed) && (tempDir != (2 + 0) % 4)) {
+	else if (!collisions[0] && _door_cord.y != this->get_position().y + _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x, pacman.y + _speed) && (tempDir != (2 + 0) % 4)/* && (pacman.y + _speed!=_door_cord.y)*/) {
 		_direction = 0;
-
+		//flag = 0;
 	}
 	
 	else if(tempDir == _direction && collisions[_direction]) {
 		for (int i = 0; i < 4; i++) {
 			if (!collisions[i] && (tempDir != (2 + i) % 4)) {
 				_direction = i;
-				
+				//flag = 4;
 			}
 		}
 	}
 
-	//очень громоздкое условие может быть стоит облегчить, использовав функцию
+	//std::cout << flag << std::endl;
 	if (_direction != -1 && !collisions[_direction]) {
 		switch (_direction) {
 		case 0:
@@ -92,10 +92,10 @@ void Ghost::movement(Map& map, Position pacman) {
 
 	_target = pacman;
 
-	if (_door == 1) {
+	if (_door == 0) {
 		GhostGetTarget(_door_cord, collisions);
 		if (get_dist_targ(_door_cord.x, _door_cord.y) == 0) {
-			_door = 0;
+			_door = 1;
 			
 		}
 	}

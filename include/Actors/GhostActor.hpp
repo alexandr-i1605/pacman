@@ -5,7 +5,7 @@
 
 class Ghost :public BaseActor {
 private:
-	bool _door = 1;
+	bool _door = 0;
 	Position _door_cord{ 320,224 };
 	Position _target{ 320,224 }; // íî ýòî íå òî÷íî
 public:
