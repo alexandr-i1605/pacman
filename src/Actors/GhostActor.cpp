@@ -11,11 +11,13 @@
 #include "map.hpp"
 
 
-Ghost::Ghost(short start_position_x, short start_position_y, short direction, short speed) {
+Ghost::Ghost(short start_position_x, short start_position_y, short direction, short speed, unsigned short scatterX, unsigned short scatterY) {
 	_position.x = start_position_x;
 	_position.y = start_position_y;
 	_direction = direction;
 	_speed = speed;
+	_scatter.x = scatterX;
+	_scatter.y = scatterY;
 }
 
 float Ghost::get_dist_targ(short targetx, short targety) {
@@ -26,35 +28,33 @@ float Ghost::get_dist_targ(short targetx, short targety) {
 }
 
 void Ghost::GhostGetTarget(Position pacman, std::vector<bool> collisions) {
-	//bool flag = 1;
+
 	short tempDir = _direction;
 	if (!collisions[1] && _door_cord.x != this->get_position().x - _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x - _speed, pacman.y) && (tempDir != (2 + 1) % 4)/*&& pacman.x - _speed != _door_cord.x*/) {
-		//flag = 0;
+
 		_direction = 1;
 	}
 	else if (!collisions[2] && _door==1 && _door_cord.y != this->get_position().y - _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x, pacman.y - _speed) && (tempDir != (2 + 2) % 4)/*&& pacman.y - _speed != _door_cord.y*/) {
 		_direction = 2;
-		//flag = 0;
+
 	}
 	else if (!collisions[3] && _door_cord.x != this->get_position().x + _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x + _speed, pacman.y) && (tempDir != (2 + 3) % 4)/* && pacman.x + _speed != _door_cord.x*/) {
 		_direction = 3;
-		//flag = 0;
+
 	}
 	else if (!collisions[0] && _door_cord.y != this->get_position().y + _speed && get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x, pacman.y + _speed) && (tempDir != (2 + 0) % 4)/* && (pacman.y + _speed!=_door_cord.y)*/) {
 		_direction = 0;
-		//flag = 0;
+
 	}
 	
 	else if(tempDir == _direction && collisions[_direction]) {
 		for (int i = 0; i < 4; i++) {
 			if (!collisions[i] && (tempDir != (2 + i) % 4)) {
 				_direction = i;
-				//flag = 4;
 			}
 		}
 	}
 
-	//std::cout << flag << std::endl;
 	if (_direction != -1 && !collisions[_direction]) {
 		switch (_direction) {
 		case 0:
@@ -100,10 +100,12 @@ void Ghost::movement(Map& map, Position pacman) {
 		}
 	}
 	else {
-		
-		Ghost::GhostGetTarget(pacman, collisions);
-
-
+		if (Ghost_mode == 1) {
+			Ghost::GhostGetTarget(pacman, collisions);
+		}
+		else {
+			Ghost::GhostGetTarget(_scatter, collisions);
+		}
 		if (_position.x <= -TILE_SIZE) {
 			_position.x = TILE_SIZE * MAP_WIDTH - 2;
 		}
@@ -111,7 +113,16 @@ void Ghost::movement(Map& map, Position pacman) {
 			_position.x = -TILE_SIZE + 2;
 		}
 	}
-	std::cout <<"dir: " << _direction << std::endl;
+	
+}
+
+bool Ghost::finish_g(Position pacman) {
+	if (get_dist_targ(pacman.x, pacman.y) <= TILE_SIZE) {
+		std::cout << "nigger\n";
+		if (0) {
+			return 1;
+		}
+	}
 }
 
 void Ghost::draw(sf::RenderWindow& window) {
