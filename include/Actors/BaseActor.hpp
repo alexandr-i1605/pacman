@@ -1,5 +1,9 @@
 ﻿#pragma once
+#include <SFML/Graphics.hpp>
+
 #include "map.hpp"
+
+
 struct Position {
 	short x;
 	short y;

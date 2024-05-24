@@ -1,5 +1,7 @@
 ﻿#pragma once
-
+#include <vector>
+#include <array>
+#include <SFML/Graphics.hpp>
 #include "Actors/Pacman.hpp"
 #include "BaseActor.hpp"
 

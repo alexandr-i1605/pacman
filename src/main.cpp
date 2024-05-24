@@ -7,6 +7,7 @@
 #include "Constants.hpp"
 #include "Actors/Pacman.hpp"
 #include "Actors/GhostActor.hpp"
+#include "Actors/GhostControl.hpp"
 #include "map.hpp"
 
 int main() {
@@ -18,8 +19,8 @@ int main() {
     Map map;
     Pacman pacman(320, 352);
     
-
-    Ghost ghost(320, 288, -1 , 1, 2* TILE_SIZE,19* TILE_SIZE); //320 288
+    GhostController MEGAKrip(map, pacman.get_position());
+    //Ghost ghost(320, 288, -1 , 1, 2* TILE_SIZE,19* TILE_SIZE); //320 288
 
     while (window.isOpen()) {
         sf::Event event;
@@ -34,8 +35,12 @@ int main() {
         pacman.movement(map);
         pacman.draw(window);
         
-        ghost.movement(map, pacman.get_position());
-        ghost.draw(window);
+        MEGAKrip.GhostTargets(map, pacman.get_position());
+        MEGAKrip.GhostDraw(window);
+        //ghost.movement(map, pacman.get_position());
+        //ghost.draw(window);
+
+
         //ghost.finish_g(pacman.get_position()); // потом замени void на bool в GhostActor 
         window.display();
     }
