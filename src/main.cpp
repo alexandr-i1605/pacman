@@ -19,7 +19,7 @@ int main() {
     Pacman pacman(320, 352);
     
 
-    Ghost ghost(320, 288, -1 , 1, 3* TILE_SIZE,2* TILE_SIZE); //320 288
+    Ghost ghost(320, 288, -1 , 1, 1* TILE_SIZE,18* TILE_SIZE); //320 288
 
     while (window.isOpen()) {
         sf::Event event;
