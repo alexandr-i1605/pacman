@@ -19,7 +19,7 @@ int main() {
     Pacman pacman(320, 352);
     
 
-    Ghost ghost(320, 288, -1 , 1, 1* TILE_SIZE,18* TILE_SIZE); //320 288
+    Ghost ghost(320, 288, -1 , 1, 2* TILE_SIZE,19* TILE_SIZE); //320 288
 
     while (window.isOpen()) {
         sf::Event event;
@@ -36,7 +36,7 @@ int main() {
         
         ghost.movement(map, pacman.get_position());
         ghost.draw(window);
-        ghost.finish_g(pacman.get_position()); // потом замени void на bool в GhostActor 
+        //ghost.finish_g(pacman.get_position()); // потом замени void на bool в GhostActor 
         window.display();
     }
 

@@ -27,107 +27,6 @@ float Ghost::get_dist_targ(short targetx, short targety) {
 	return std::sqrt(powf(TempRes.x, 2) + powf(TempRes.y, 2)); //ìá òóò íàäî ÷åò ñäåëòü ñ x y è ïðåäóñìîòðåòü îòðèö çíà÷
 }
 
-//void Ghost::GhostGetTarget(Position target, std::vector<bool> collisions) {
-//	short avalibale_ways = 0;
-//	short tempDir = _direction;
-//	for (short i =0 ; i < 4; i++) {
-//		if (!collisions[i] && (2+i)%4) {
-//			avalibale_ways++;
-//		}
-//	}
-//	if (avalibale_ways > 1) {
-//		Position TempRes;
-//		TempRes.x = target.x - this->get_position().x; //получился вектор
-//		TempRes.y = target.y - this->get_position().y;
-//		
-//		
-//		
-//		if (((abs(TempRes.x) > abs(TempRes.y)) && TempRes.x>0) && !collisions[1] /*&& get_dist_targ(target.x, target.y) > get_dist_targ(target.x - _speed, target.y)*/ && _door_cord.x != this->get_position().x - _speed && (tempDir != (2 + 1) % 4)) {
-//			_direction = 1;
-//			std::cout << "1!\n";
-//		}
-//		else if (((abs(TempRes.y) > abs(TempRes.x)) && TempRes.y < 0) && !collisions[0] /*&& get_dist_targ(target.x, target.y) > get_dist_targ(target.x , target.y + _speed)*/ && _door_cord.y != this->get_position().y + _speed && (tempDir != (2 + 0) % 4)) {
-//			_direction = 0;
-//			std::cout << "0!\n";
-//		}
-//		else if (((abs(TempRes.y) > abs(TempRes.x)) && TempRes.y > 0) && !collisions[2]/* && get_dist_targ(target.x, target.y) > get_dist_targ(target.x, target.y - _speed)*/ && _door == 1 && _door_cord.y != this->get_position().y - _speed && (tempDir != (2 + 2) % 4)) {
-//			_direction = 2;
-//			std::cout << "2!\n";
-//		}
-//		else if (((abs(TempRes.x) > abs(TempRes.y)) && TempRes.x < 0) && !collisions[3]/* && get_dist_targ(target.x, target.y) > get_dist_targ(target.x + _speed, target.y)*/ && _door_cord.x != this->get_position().x + _speed &&  (tempDir != (2 + 3) % 4)) {
-//			_direction = 3;
-//			std::cout << "3!\n";
-//		}
-//		
-//		if (((abs(TempRes.y) == abs(TempRes.x)) && TempRes.y > 0 && TempRes.x > 0) && !collisions[1] && !collisions[2] && _door_cord.y != this->get_position().y - _speed && _door_cord.y != this->get_position().x - _speed && (tempDir != (2 + 1) % 4) && (tempDir != (2 + 2) % 4)) {
-//			_direction = 2;
-//			std::cout << "2?\n";
-//		}
-//		else if (((abs(TempRes.y) == abs(TempRes.x)) && TempRes.y > 0 && TempRes.x < 0) && !collisions[3] && !collisions[2] && _door_cord.y != this->get_position().y - _speed && _door_cord.y != this->get_position().x + _speed && (tempDir != (2 + 3) % 4) && (tempDir != (2 + 2) % 4)) {
-//			_direction = 2;
-//			std::cout << "2?\n";
-//		}
-//		else if (((abs(TempRes.y) == abs(TempRes.x)) && TempRes.y < 0 && TempRes.x < 0) && !collisions[3] && !collisions[0] && _door_cord.y != this->get_position().y + _speed && _door_cord.y != this->get_position().x + _speed && (tempDir != (2 + 3) % 4) && (tempDir != (2 + 0) % 4)) {
-//			_direction = 0;
-//			std::cout << "0?\n";
-//		}
-//		else if (((abs(TempRes.y) == abs(TempRes.x)) && TempRes.y < 0 && TempRes.x > 0) && !collisions[0] && !collisions[1] && _door_cord.y != this->get_position().y + _speed && _door_cord.y != this->get_position().x - _speed && (tempDir != (2 + 1) % 4) && (tempDir != (2 + 0) % 4)) {
-//			_direction = 0;
-//			std::cout << "0?\n";
-//		}
-//
-//		else if (tempDir == _direction && collisions[_direction]) {
-//			for (int i = 0; i < 4; i++) {
-//				if (!collisions[i] && (tempDir != (2 + i) % 4)) {
-//					_direction = i;
-//				}
-//			}
-//		}
-//		
-//
-//	}
-//	
-//
-//	else if (tempDir == _direction && collisions[_direction]) {
-//		for (int i = 0; i < 4; i++) {
-//			if (!collisions[i] && (tempDir != (2 + i) % 4)) {
-//				_direction = i;
-//			}
-//		}
-//	}
-//	/*else if (tempDir == _direction && collisions[_direction]) {
-//		for (int i = 0; i < 4; i++) {
-//			if (!collisions[i] && (tempDir != (2 + i) % 4)) {
-//				_direction = i;
-//			}
-//		}
-//	}*/
-//
-//	if (_direction != -1 && !collisions[_direction]) {
-//		switch (_direction) {
-//		case 0:
-//		{
-//			_position.y -= _speed;
-//			break;
-//		}
-//		case 1:
-//		{
-//			_position.x += _speed;
-//			break;
-//		}
-//		case 2:
-//		{
-//			_position.y += _speed;
-//			break;
-//		}
-//		case 3:
-//		{
-//			_position.x -= _speed;
-//			break;
-//		}
-//		}
-//	}
-//}
 
 bool Ghost::CheckBaned1() {
 	if (this->get_position().x - _speed * TILE_SIZE == _Banned1.x && this->get_position().y == _Banned1.y) {
@@ -231,9 +130,14 @@ void Ghost::movement(Map& map, Position pacman) {
 	else {
 		if (Ghost_mode == 1) {
 			Ghost::GhostGetTarget(pacman, collisions);
+			this->finish_g(pacman);
+			
 		}
 		else {
 			Ghost::GhostGetTarget(_scatter, collisions);
+			if (get_dist_targ(_scatter.x,_scatter.y) == 0) {
+				Ghost_mode = 1;
+			}
 		}
 		if (_position.x <= -TILE_SIZE) {
 			_position.x = TILE_SIZE * MAP_WIDTH - 2;
