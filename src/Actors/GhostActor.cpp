@@ -11,7 +11,11 @@
 #include "map.hpp"
 
 
-Ghost::Ghost(short start_position_x, short start_position_y, short direction, short speed, unsigned short scatterX, unsigned short scatterY) {
+Ghost::Ghost(short id, short start_position_x, short start_position_y, short direction, short speed, unsigned short scatterX, unsigned short scatterY) {
+	_Ghost_id = id;
+	if (_Ghost_id == 0) {
+		//_door = 1;
+	}
 	_position.x = start_position_x;
 	_position.y = start_position_y;
 	_direction = direction;
@@ -101,7 +105,7 @@ void Ghost::GhostGetTarget(Position pacman, std::vector<bool> collisions) {
 
 		else if (tempDir == _direction && collisions[_direction]) {
 			for (int i = 0; i < 4; i++) {
-				if (!collisions[i] && (tempDir != (2 + i) % 4)) {
+				if (!collisions[i]  && (tempDir != (2 + i) % 4)) {
 					_direction = i;
 				}
 			}
@@ -194,6 +198,9 @@ void Ghost::draw(sf::RenderWindow& window, short n ) {
 	case 1:
 		circle.setFillColor(sf::Color(255, 182, 255));
 		break;
+	case 2:
+		circle.setFillColor(sf::Color(0, 255, 255));
+		break;
 	default:
 		break;
 	}
@@ -225,4 +232,8 @@ std::vector<bool> Ghost::get_collision(Map map) {
 
 short Ghost::get_ghost_mode() {
 	return Ghost_mode;
+}
+
+short Ghost::get_ghost_id() {
+	return _Ghost_id;
 }

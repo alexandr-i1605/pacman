@@ -7,7 +7,7 @@
 #include "Actors/GhostActor.hpp"
 #include "map.hpp"
 
-GhostController::GhostController(Map map, Position position) : _ghosts({ Ghost(10 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE),Ghost(9 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE)/*,Ghost(11 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE), Ghost(10 * TILE_SIZE, 8 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE)*/ })
+GhostController::GhostController(Map map, Position position) : _ghosts({ Ghost(0, 10 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE),Ghost(1, 9 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 18 * TILE_SIZE,1 * TILE_SIZE) ,Ghost(2, 11 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE)/*, Ghost(10 * TILE_SIZE, 8 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE)*/ })
 //_ghosts({Ghost( 10* TILE_SIZE, 9* TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE ),Ghost(8 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE),Ghost(11 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE)});
 {
 	_map = map;
@@ -25,11 +25,10 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 	for (short i = 0; i < _ghosts.size(); i++) {
 		if (i == 0) {
 			_ghosts[0].movement(_map, New_pac.get_position(),New_pac.get_position());
-			//std::cout << _ghosts[0].check_door() <<"    ";
+			std::cout << New_pac.get_position().x / TILE_SIZE<<"  " << New_pac.get_position().y / TILE_SIZE <<std::endl;
 		}
 
 		if (i == 1) {
-			//std::cout << _ghosts[1].check_door() << std::endl;
 			if (_ghosts[1].get_ghost_mode() == 0) {
 				_ghosts[1].movement(_map,_ghosts[1].get_scater(),New_pac.get_position());
 			}
@@ -64,6 +63,13 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 			}
 			
 		}
+		if (i == 2) {
+			if (_map.get_pills() < 2 * PILSS_AT_START / 3) {
+				_NewTarget.x = 2 * (_NewTarget.x - _ghosts[0].get_position().x) + _ghosts[0].get_position().x;
+				_NewTarget.y =2 * (_NewTarget.y - _ghosts[0].get_position().y) + _ghosts[0].get_position().y;
+				_ghosts[2].movement(_map, _NewTarget, New_pac.get_position());
+			}
+		}
 	}
 }
 
@@ -73,4 +79,5 @@ void GhostController::GhostDraw(sf::RenderWindow& window) {
 		
 	_ghosts[1].draw(window, 1);
 		
+	_ghosts[2].draw(window, 2);
 }

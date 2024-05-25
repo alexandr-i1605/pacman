@@ -12,7 +12,7 @@ class GhostController {
 private:
 	Position _NewTarget;
 	Map _map;
-	std::array<Ghost, 2> _ghosts;
+	std::array<Ghost, 3> _ghosts;
 public:
 	GhostController(Map map, Position posit_pac);
 	void update(Map map, Position pacman);
