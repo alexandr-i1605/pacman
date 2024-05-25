@@ -82,7 +82,7 @@ bool Map::check_collision(short next_X, short next_Y) { //true - если ест
 	return false;
 }
 
-void Map::collect_manager(short next_X, short next_Y, short direction) {
+void Map::collect_manager(short next_X, short next_Y,const short direction) {
 	float current_x = next_X / float(TILE_SIZE);
 	float current_y = next_Y / float(TILE_SIZE);
 	short x = 0;

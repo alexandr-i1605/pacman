@@ -129,7 +129,7 @@ void Ghost::GhostGetTarget(Position pacman, std::vector<bool> collisions) {
 	}
 }
 
-void Ghost::movement(Map& map, Position pacman) {
+void Ghost::movement(Map& map, Position Target, Position pacman) {
 
 
 	std::vector<bool> collisions(4);
@@ -149,7 +149,7 @@ void Ghost::movement(Map& map, Position pacman) {
 	}
 	else {
 		if (Ghost_mode == 1) {
-			Ghost::GhostGetTarget(pacman, collisions);
+			Ghost::GhostGetTarget(Target, collisions);
 			this->finish_g(pacman);
 			
 		}
@@ -170,9 +170,9 @@ void Ghost::movement(Map& map, Position pacman) {
 	std::cout << floor(pacman.x/ TILE_SIZE) << " " << floor(pacman.y/ TILE_SIZE) << "\n";*/
 }
 
-bool Ghost::finish_g(Position pacman) {
-	if (get_dist_targ(pacman.x, pacman.y) <= TILE_SIZE) {
-		std::cout << "nigger\n";
+bool Ghost::finish_g(Position Target) {
+	if (get_dist_targ(Target.x, Target.y) <= TILE_SIZE) {
+		std::cout << "nigger"<<rand()%10<<"\n";
 		if (0) {
 			return 1;
 		}
@@ -185,9 +185,10 @@ void Ghost::draw(sf::RenderWindow& window, short n ) {
 	{
 	case 0:
 		circle.setFillColor(sf::Color::White);
-
+		break;
 	case 1:
 		circle.setFillColor(sf::Color::Red);
+		break;
 	default:
 		break;
 	}

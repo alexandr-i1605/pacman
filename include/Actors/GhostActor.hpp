@@ -19,8 +19,8 @@ public:
 	float get_dist_targ(short tragetx, short targety);//âîçâðàùàåò ðàññòîÿíèå äî öåëè 
 	bool CheckBaned1();
 	bool CheckBaned2();
-	bool finish_g(Position pacman);
-	void movement(Map& map, const Position pacman);
+	bool finish_g(Position Target);
+	void movement(Map& map, const Position Target, Position pacman);
 	void GhostGetTarget(Position pacman, std::vector<bool> collisions);
 	short get_speed(); //по-хорошему сделать не типа инт, а другого
 	void draw(sf::RenderWindow& window, short n);
