@@ -7,7 +7,7 @@
 
 class Ghost :public BaseActor {
 private:
-	bool _door = 0;
+	bool _door = 0; //1 вышел, 0 внутри
 	Position _door_cord{ 320,256 };
 	Position _Banned1 = { 14 * TILE_SIZE,9 * TILE_SIZE };
 	Position _Banned2 = { 4 * TILE_SIZE,9 * TILE_SIZE };

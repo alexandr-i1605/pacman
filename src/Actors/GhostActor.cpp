@@ -71,6 +71,14 @@ void Ghost::GhostGetTarget(Position pacman, std::vector<bool> collisions) {
 			}
 		}
 	}
+	if (avalibale_ways == 1) {
+		for (short i = 0; i < 4; i++) {
+			if(!collisions[i]) {
+				_direction = i;
+			}
+		}
+		/*_direction = ((2 + tempDir) % 4);*/
+	}
 	if (avalibale_ways > 1) {
 		//float Min_dist = sqrt(pow((MAP_HEIGHT * TILE_SIZE), 2) + pow((MAP_WIDTH * TILE_SIZE), 2));
 		if (!collisions[0] && _door_cord.y != this->get_position().y + _speed && Dist[0] == Min_dist /*get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x, pacman.y + _speed)*/ && (tempDir != (2 + 0) % 4) && (pacman.y + _speed != _door_cord.y)) {
@@ -90,9 +98,6 @@ void Ghost::GhostGetTarget(Position pacman, std::vector<bool> collisions) {
 			_direction = 1;
 		}
 
-		else if (avalibale_ways == 1) {
-			_direction = ((2 + tempDir) % 4);
-		}
 
 		else if (tempDir == _direction && collisions[_direction]) {
 			for (int i = 0; i < 4; i++) {
@@ -101,30 +106,30 @@ void Ghost::GhostGetTarget(Position pacman, std::vector<bool> collisions) {
 				}
 			}
 		}
-
-		if (_direction != -1 && !collisions[_direction]) {
-			switch (_direction) {
-			case 0:
-			{
-				_position.y -= _speed;
-				break;
-			}
-			case 1:
-			{
-				_position.x += _speed;
-				break;
-			}
-			case 2:
-			{
-				_position.y += _speed;
-				break;
-			}
-			case 3:
-			{
-				_position.x -= _speed;
-				break;
-			}
-			}
+		
+	}
+	if (_direction != -1 && !collisions[_direction]) {
+		switch (_direction) {
+		case 0:
+		{
+			_position.y -= _speed;
+			break;
+		}
+		case 1:
+		{
+			_position.x += _speed;
+			break;
+		}
+		case 2:
+		{
+			_position.y += _speed;
+			break;
+		}
+		case 3:
+		{
+			_position.x -= _speed;
+			break;
+		}
 		}
 	}
 }
@@ -184,10 +189,10 @@ void Ghost::draw(sf::RenderWindow& window, short n ) {
 	switch (n)
 	{
 	case 0:
-		circle.setFillColor(sf::Color::White);
+		circle.setFillColor(sf::Color::Red);
 		break;
 	case 1:
-		circle.setFillColor(sf::Color::Red);
+		circle.setFillColor(sf::Color(255, 182, 255));
 		break;
 	default:
 		break;

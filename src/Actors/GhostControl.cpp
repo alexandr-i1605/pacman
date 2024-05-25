@@ -7,7 +7,7 @@
 #include "Actors/GhostActor.hpp"
 #include "map.hpp"
 
-GhostController::GhostController(Map map, Position position) : _ghosts({ Ghost(10 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE),Ghost(10 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE)/*,Ghost(11 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE), Ghost(10 * TILE_SIZE, 8 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE)*/ })
+GhostController::GhostController(Map map, Position position) : _ghosts({ Ghost(10 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE),Ghost(9 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE)/*,Ghost(11 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE), Ghost(10 * TILE_SIZE, 8 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE)*/ })
 //_ghosts({Ghost( 10* TILE_SIZE, 9* TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE ),Ghost(8 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE),Ghost(11 * TILE_SIZE, 9 * TILE_SIZE, -1 , 1, 2 * TILE_SIZE,19 * TILE_SIZE)});
 {
 	_map = map;
@@ -25,16 +25,15 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 	for (short i = 0; i < _ghosts.size(); i++) {
 		if (i == 0) {
 			_ghosts[0].movement(_map, New_pac.get_position(),New_pac.get_position());
-			
+			//std::cout << _ghosts[0].check_door() <<"    ";
 		}
 
 		if (i == 1) {
+			//std::cout << _ghosts[1].check_door() << std::endl;
 			if (_ghosts[1].get_ghost_mode() == 0) {
-				//_ghosts[1].GhostGetTarget(_ghosts[1].get_scater(), _ghosts[1].get_collision(_map));
 				_ghosts[1].movement(_map,_ghosts[1].get_scater(),New_pac.get_position());
 			}
 			else {
-				//std::cout << New_pac.get_direction() << std::endl;
 				switch (New_pac.get_direction())
 				{
 				case 0:
@@ -59,7 +58,6 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 					break;
 
 				default:
-					//std::cout << New_pac.get_direction();
 					break;
 				}
 				_ghosts[1].movement(_map, _NewTarget,New_pac.get_position());
