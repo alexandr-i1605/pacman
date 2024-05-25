@@ -12,6 +12,7 @@ GhostController::GhostController(Map map, Position position) : _ghosts({ Ghost(0
 {
 	_map = map;
 	_NewTarget = position;
+	_Global_scary_mode = 0;
 }
 
 void GhostController::update(Map map, Position newTarget) {
@@ -25,8 +26,11 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 	for (short i = 0; i < _ghosts.size(); i++) {
 		if (i == 0) {
 			_ghosts[0].movement(_map, New_pac.get_position(),New_pac.get_position());
-			std::cout << New_pac.get_position().x / TILE_SIZE<<"  " << New_pac.get_position().y / TILE_SIZE <<std::endl;
+			std::cout << New_pac.get_position().x / TILE_SIZE<<"  " << New_pac.get_position().y / TILE_SIZE <<std::endl; //красный призрак
 		}
+
+
+		// розовый призрак
 
 		if (i == 1) {
 			if (_ghosts[1].get_ghost_mode() == 0) {
@@ -63,6 +67,9 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 			}
 			
 		}
+
+		//голубой(ты) призрак
+
 		if (i == 2) {
 			if (_map.get_pills() < 2 * PILSS_AT_START / 3) {
 				_NewTarget.x = 2 * (_NewTarget.x - _ghosts[0].get_position().x) + _ghosts[0].get_position().x;
