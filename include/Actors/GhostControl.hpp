@@ -10,11 +10,12 @@
 
 class GhostController {
 private:
-	Position _pacman;
+	Position _NewTarget;
 	Map _map;
-	std::array<Ghost, 1> _ghosts;
+	std::array<Ghost, 2> _ghosts;
 public:
-	GhostController(Map map, Position pacman);
-	void GhostTargets(Map map, Position pacman);
+	GhostController(Map map, Position posit_pac);
+	void update(Map map, Position pacman);
+	void GhostTargets(Map map, Pacman pacman);
 	void GhostDraw(sf::RenderWindow& window);
 };

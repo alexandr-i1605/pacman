@@ -19,5 +19,5 @@ public:
 	void set_position(short x, short y);
 	Position get_position();
 	void movement(Map& map);
-	virtual void draw(sf::RenderWindow& window) = 0;
+	void draw(sf::RenderWindow& window);
 };

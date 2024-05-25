@@ -90,7 +90,9 @@ void Ghost::GhostGetTarget(Position pacman, std::vector<bool> collisions) {
 			_direction = 1;
 		}
 
-
+		else if (avalibale_ways == 1) {
+			_direction = ((2 + tempDir) % 4);
+		}
 
 		else if (tempDir == _direction && collisions[_direction]) {
 			for (int i = 0; i < 4; i++) {
@@ -164,8 +166,8 @@ void Ghost::movement(Map& map, Position pacman) {
 			_position.x = -TILE_SIZE + 2;
 		}
 	}
-	std::cout << floor(_position.x / TILE_SIZE) << " " << floor(_position.y/ TILE_SIZE) << "      ";
-	std::cout << floor(pacman.x/ TILE_SIZE) << " " << floor(pacman.y/ TILE_SIZE) << "\n";
+	/*std::cout << floor(_position.x / TILE_SIZE) << " " << floor(_position.y/ TILE_SIZE) << "      ";
+	std::cout << floor(pacman.x/ TILE_SIZE) << " " << floor(pacman.y/ TILE_SIZE) << "\n";*/
 }
 
 bool Ghost::finish_g(Position pacman) {
@@ -177,10 +179,44 @@ bool Ghost::finish_g(Position pacman) {
 	}
 }
 
-void Ghost::draw(sf::RenderWindow& window) {
+void Ghost::draw(sf::RenderWindow& window, short n ) {
 	sf::CircleShape circle(TILE_SIZE / 2);
-	circle.setFillColor(sf::Color::White);
+	switch (n)
+	{
+	case 0:
+		circle.setFillColor(sf::Color::White);
+
+	case 1:
+		circle.setFillColor(sf::Color::Red);
+	default:
+		break;
+	}
+	//circle.setFillColor(sf::Color::White);
 	circle.setPosition(_position.x, _position.y);
 	window.draw(circle);
 }
 
+short Ghost::get_speed() {
+	return _speed;
+}
+
+bool Ghost::check_door() {
+	return _door;
+}
+
+Position Ghost::get_scater() {
+	return _scatter;
+}
+
+std::vector<bool> Ghost::get_collision(Map map) {
+	std::vector<bool> collisions(4);
+	collisions[0] = map.check_collision(_position.x, _position.y - _speed);
+	collisions[1] = map.check_collision(_position.x + _speed, _position.y);
+	collisions[2] = map.check_collision(_position.x, _position.y + _speed);
+	collisions[3] = map.check_collision(_position.x - _speed, _position.y);
+	return collisions;
+}
+
+short Ghost::get_ghost_mode() {
+	return Ghost_mode;
+}

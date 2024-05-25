@@ -20,7 +20,7 @@ int main() {
     Pacman pacman(320, 352);
     
     GhostController MEGAKrip(map, pacman.get_position());
-    //Ghost ghost(320, 288, -1 , 1, 2* TILE_SIZE,19* TILE_SIZE); //320 288
+    
 
     while (window.isOpen()) {
         sf::Event event;
@@ -30,18 +30,13 @@ int main() {
             }
         }
         window.clear();
-
+        
         map.draw_map(window);
         pacman.movement(map);
         pacman.draw(window);
-        
-        MEGAKrip.GhostTargets(map, pacman.get_position());
+        MEGAKrip.update(map, pacman.get_position());
+        MEGAKrip.GhostTargets(map, pacman);
         MEGAKrip.GhostDraw(window);
-        //ghost.movement(map, pacman.get_position());
-        //ghost.draw(window);
-
-
-        //ghost.finish_g(pacman.get_position()); // потом замени void на bool в GhostActor 
         window.display();
     }
 

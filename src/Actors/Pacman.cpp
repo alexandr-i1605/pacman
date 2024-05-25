@@ -91,3 +91,7 @@ void Pacman::draw(sf::RenderWindow& window) {
 	}
 	window.draw(PacSprite);
 }
+
+short Pacman::get_direction() {
+	return _direction;
+}
