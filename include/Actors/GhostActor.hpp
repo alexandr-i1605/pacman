@@ -22,6 +22,7 @@ public:
 	float get_dist_targ(short tragetx, short targety);//âîçâðàùàåò ðàññòîÿíèå äî öåëè 
 	short get_speed(); //по-хорошему сделать не типа инт, а другого
 	Position get_scater();
+	Position get_door_cord();
 	std::vector<bool> get_collision(Map map);
 	bool CheckBaned1();
 	bool CheckBaned2();
@@ -30,6 +31,7 @@ public:
 	void GhostGetTarget(Position pacman, std::vector<bool> collisions);
 	void set_scarry_mode(bool Ghost_Mode);
 	void set_speed(float kof);
+	void set_door(bool n);
 	virtual void draw(sf::RenderWindow& window) override;
 	bool check_door();
 	//Position get_scater();

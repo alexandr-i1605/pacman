@@ -89,7 +89,11 @@ void Ghost::GhostGetTarget(Position pacman, std::vector<bool> collisions) {
 			_direction = 0;
 
 		}
-		else if (!collisions[2] && _door == 1 && (_door_cord.y != this->get_position().y + _speed * TILE_SIZE) && Dist[2] == Min_dist/*get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x, pacman.y - _speed)*/ && (tempDir != (2 + 2) % 4) && pacman.y - _speed != _door_cord.y) {
+		else if (!collisions[2] /*&& _door == 1*/ && (_door_cord.y != this->get_position().y + _speed * TILE_SIZE) && Dist[2] == Min_dist/*get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x, pacman.y - _speed)*/ && (tempDir != (2 + 2) % 4) && pacman.y - _speed != _door_cord.y) {
+			_direction = 2;
+
+		}
+		else if (!collisions[2] && _door == 0 && (_door_cord.x == this->get_position().x ) && (_door_cord.y == this->get_position().y + _speed * TILE_SIZE) && Dist[2] == Min_dist/*get_dist_targ(pacman.x, pacman.y) > get_dist_targ(pacman.x, pacman.y - _speed)*/ && (tempDir != (2 + 2) % 4) && pacman.y - _speed != _door_cord.y) {
 			_direction = 2;
 
 		}
@@ -162,18 +166,26 @@ void Ghost::movement(Map& map, Position Target, Position pacman) {
 			this->finish_g(pacman);
 			
 		}
+		else if (Ghost_mode == 2) {
+			Ghost::GhostGetTarget(_door_cord, collisions);
+			if (get_dist_targ(_door_cord.x, _door_cord.y) == 0) {
+				Ghost_mode = 1;
+				this->set_speed(1);
+			}
+		}
 		else if (this->finish_g(pacman)) {
 			Ghost_mode = 2;
 			Ghost::GhostGetTarget(_door_cord, collisions);
 			//this->set_speed(4);
+			_door = 0; //мб убрать
 			std::cout << "nig";
 		}
 		else {
 			Ghost::GhostGetTarget(_scatter, collisions);
-			if (get_dist_targ(_scatter.x,_scatter.y) == 0) {
+			/*if (get_dist_targ(_scatter.x,_scatter.y) == 0) { если хотим чтобы пакмен преследовал цель после того как достиг угла
 				Ghost_mode = 1;
 				this->set_speed(1);
-			}
+			}*/
 		}
 		if (_position.x <= -TILE_SIZE) {
 			_position.x = TILE_SIZE * MAP_WIDTH - 2;
@@ -277,4 +289,12 @@ void Ghost::set_scarry_mode(bool scary_mode) {
 
 void Ghost::set_speed(float kof) {
 	_kof_of_speed = kof;
+}
+
+void Ghost::set_door(bool n) {
+	_door = n;
+}
+
+Position Ghost::get_door_cord() {
+	return _door_cord;
 }

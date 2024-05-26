@@ -30,7 +30,8 @@ void GhostController::update(Map map, Position newTarget) {
 	if (_Scarrry_timer > GLOBAL_SCARRY_TIMER) {
 		for (short i = 0; i < _ghosts.size(); i++) {
 			_ghosts[i].set_scarry_mode(1);
-			//_ghosts[i].set_speed(1);
+			_ghosts[i].set_speed(1);
+			_ghosts[i].set_door(1);
 		}
 	}
 }
@@ -42,6 +43,9 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 		if (i == 0) {
 			if (_ghosts[0].get_ghost_mode() == 0 && _Scarrry_timer < GLOBAL_SCARRY_TIMER) {
 				_ghosts[0].movement(_map, _ghosts[0].get_scater(), New_pac.get_position());
+			}
+			else if (_ghosts[0].get_ghost_mode() == 2) {
+				_ghosts[0].movement(_map, _ghosts[0].get_door_cord(), New_pac.get_position());
 			}
 			else {
 				_ghosts[0].movement(_map, New_pac.get_position(), New_pac.get_position());
@@ -55,6 +59,9 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 		if (i == 1) {
 			if (_ghosts[1].get_ghost_mode() == 0 && _Scarrry_timer < GLOBAL_SCARRY_TIMER) {
 				_ghosts[1].movement(_map,_ghosts[1].get_scater(),New_pac.get_position());
+			}
+			else if (_ghosts[1].get_ghost_mode() == 2 ) {
+				_ghosts[1].movement(_map, _ghosts[1].get_door_cord(), New_pac.get_position());
 			}
 			else {
 				switch (New_pac.get_direction())
@@ -95,6 +102,9 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 				_ghosts[2].movement(_map, _ghosts[2].get_scater(), New_pac.get_position());
 				
 			}
+			else if (_ghosts[2].get_ghost_mode() == 2) {
+				_ghosts[2].movement(_map, _ghosts[2].get_door_cord(), New_pac.get_position());
+			}
 			else if (_map.get_pills() < 2 * PILSS_AT_START / 3) {
 				_NewTarget.x = 2 * (_NewTarget.x - _ghosts[0].get_position().x) + _ghosts[0].get_position().x;
 				_NewTarget.y =2 * (_NewTarget.y - _ghosts[0].get_position().y) + _ghosts[0].get_position().y;
@@ -104,7 +114,7 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 		}
 	}
 	_Scarrry_timer++;
-	std::cout << _Scarrry_timer << std::endl;
+	std::cout << _Scarrry_timer<<"    " << _ghosts[0].get_ghost_mode() <<"     " << _ghosts[0].check_door()<< std::endl;
 }
 
 void GhostController::GhostDraw(sf::RenderWindow& window) {

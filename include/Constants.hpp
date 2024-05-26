@@ -10,7 +10,7 @@ const unsigned short MAP_HEIGHT = 21; //Высота карты в плитка�
 
 const unsigned short PILSS_AT_START = 187;
 
-const unsigned short GLOBAL_SCARRY_TIMER = 400;
+const unsigned short GLOBAL_SCARRY_TIMER = 700;
 
 //const unsigned short SCATTER_CORD_RED = 
 //bool GAME_OVER = 0; // когда призрак догнал пакмена, то она становится 1
