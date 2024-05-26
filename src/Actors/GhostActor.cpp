@@ -162,10 +162,17 @@ void Ghost::movement(Map& map, Position Target, Position pacman) {
 			this->finish_g(pacman);
 			
 		}
+		else if (this->finish_g(pacman)) {
+			Ghost_mode = 2;
+			Ghost::GhostGetTarget(_door_cord, collisions);
+			//this->set_speed(4);
+			std::cout << "nig";
+		}
 		else {
 			Ghost::GhostGetTarget(_scatter, collisions);
 			if (get_dist_targ(_scatter.x,_scatter.y) == 0) {
 				Ghost_mode = 1;
+				this->set_speed(1);
 			}
 		}
 		if (_position.x <= -TILE_SIZE) {
@@ -182,27 +189,34 @@ void Ghost::movement(Map& map, Position Target, Position pacman) {
 bool Ghost::finish_g(Position Target) {
 	if (get_dist_targ(Target.x, Target.y) <= TILE_SIZE) {
 		std::cout << "nigger"<<rand()%10<<"\n";
-		if (0) {
-			return 1;
-		}
+	    return 1;
+	}
+	else {
+		return 0;
 	}
 }
 
-void Ghost::draw(sf::RenderWindow& window, short n) {
+void Ghost::draw(sf::RenderWindow& window) {
 	sf::CircleShape circle(TILE_SIZE / 2);
-	switch (n)
+	switch (this->get_ghost_id())
 	{
 	case 0:
-		if (this->get_ghost_mode() != 0) {
+		if (this->get_ghost_mode() == 1 ) {
 			circle.setFillColor(sf::Color::Red);
+		}
+		else if (this->get_ghost_mode() == 2) {
+			circle.setFillColor(sf::Color::White);
 		}
 		else {
 			circle.setFillColor(sf::Color::Blue);
 		}
 		break;
 	case 1:
-		if (this->get_ghost_mode() != 0) {
+		if (this->get_ghost_mode() == 1 ) {
 			circle.setFillColor(sf::Color(255, 182, 255));
+		}
+		else if (this->get_ghost_mode() == 2) {
+			circle.setFillColor(sf::Color::White);
 		}
 		else {
 			circle.setFillColor(sf::Color::Blue);
@@ -210,8 +224,11 @@ void Ghost::draw(sf::RenderWindow& window, short n) {
 		//circle.setFillColor(sf::Color(255, 182, 255));
 		break;
 	case 2:
-		if (this->get_ghost_mode() != 0) {
+		if (this->get_ghost_mode() == 1 ) {
 			circle.setFillColor(sf::Color(0, 255, 255));
+		}
+		else if (this->get_ghost_mode() == 2) {
+			circle.setFillColor(sf::Color::White);
 		}
 		//circle.setFillColor(sf::Color(0, 255, 255));
 		else {
@@ -256,4 +273,8 @@ short Ghost::get_ghost_id() {
 
 void Ghost::set_scarry_mode(bool scary_mode) {
 	Ghost_mode = scary_mode;
+}
+
+void Ghost::set_speed(float kof) {
+	_kof_of_speed = kof;
 }

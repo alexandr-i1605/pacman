@@ -10,6 +10,7 @@
 
 class GhostController {
 private:
+	unsigned int _Scarrry_timer;
 	short _Boost_pills_counter;
 	Position _NewTarget;
 	Map _map;
