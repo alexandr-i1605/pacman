@@ -188,23 +188,39 @@ bool Ghost::finish_g(Position Target) {
 	}
 }
 
-void Ghost::draw(sf::RenderWindow& window, short n ) {
+void Ghost::draw(sf::RenderWindow& window, short n) {
 	sf::CircleShape circle(TILE_SIZE / 2);
 	switch (n)
 	{
 	case 0:
-		circle.setFillColor(sf::Color::Red);
+		if (this->get_ghost_mode() != 0) {
+			circle.setFillColor(sf::Color::Red);
+		}
+		else {
+			circle.setFillColor(sf::Color::Blue);
+		}
 		break;
 	case 1:
-		circle.setFillColor(sf::Color(255, 182, 255));
+		if (this->get_ghost_mode() != 0) {
+			circle.setFillColor(sf::Color(255, 182, 255));
+		}
+		else {
+			circle.setFillColor(sf::Color::Blue);
+		}
+		//circle.setFillColor(sf::Color(255, 182, 255));
 		break;
 	case 2:
-		circle.setFillColor(sf::Color(0, 255, 255));
+		if (this->get_ghost_mode() != 0) {
+			circle.setFillColor(sf::Color(0, 255, 255));
+		}
+		//circle.setFillColor(sf::Color(0, 255, 255));
+		else {
+			circle.setFillColor(sf::Color::Blue);
+		}
 		break;
 	default:
 		break;
 	}
-	//circle.setFillColor(sf::Color::White);
 	circle.setPosition(_position.x, _position.y);
 	window.draw(circle);
 }
@@ -236,4 +252,8 @@ short Ghost::get_ghost_mode() {
 
 short Ghost::get_ghost_id() {
 	return _Ghost_id;
+}
+
+void Ghost::set_scarry_mode(bool scary_mode) {
+	Ghost_mode = scary_mode;
 }

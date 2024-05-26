@@ -12,12 +12,19 @@ GhostController::GhostController(Map map, Position position) : _ghosts({ Ghost(0
 {
 	_map = map;
 	_NewTarget = position;
-	_Global_scary_mode = 0;
+	_Boost_pills_counter = map.get_boost_pills();
 }
 
 void GhostController::update(Map map, Position newTarget) {
 	_NewTarget = newTarget;
 	_map = map;
+	short New_Boost_pills = _map.get_boost_pills();
+	if (New_Boost_pills < _Boost_pills_counter) {
+		for (short i = 0; i < _ghosts.size(); i++) {
+			_ghosts[i].set_scarry_mode(0);
+		}
+		_Boost_pills_counter = New_Boost_pills;
+	}
 }
 
 
@@ -25,8 +32,13 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 	_map = map;
 	for (short i = 0; i < _ghosts.size(); i++) {
 		if (i == 0) {
-			_ghosts[0].movement(_map, New_pac.get_position(),New_pac.get_position());
-			std::cout << New_pac.get_position().x / TILE_SIZE<<"  " << New_pac.get_position().y / TILE_SIZE <<std::endl; //красный призрак
+			if (_ghosts[0].get_ghost_mode() == 0) {
+				_ghosts[0].movement(_map, _ghosts[0].get_scater(), New_pac.get_position());
+			}
+			else {
+				_ghosts[0].movement(_map, New_pac.get_position(), New_pac.get_position());
+				//std::cout << New_pac.get_position().x / TILE_SIZE<<"  " << New_pac.get_position().y / TILE_SIZE <<std::endl; //красный призрак
+			}
 		}
 
 
@@ -71,9 +83,13 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 		//голубой(ты) призрак
 
 		if (i == 2) {
-			if (_map.get_pills() < 2 * PILSS_AT_START / 3) {
+			if (_ghosts[2].get_ghost_mode() == 0 && _map.get_pills() < 2 * PILSS_AT_START / 3) {
+				_ghosts[2].movement(_map, _ghosts[2].get_scater(), New_pac.get_position());
+			}
+			else if (_map.get_pills() < 2 * PILSS_AT_START / 3) {
 				_NewTarget.x = 2 * (_NewTarget.x - _ghosts[0].get_position().x) + _ghosts[0].get_position().x;
 				_NewTarget.y =2 * (_NewTarget.y - _ghosts[0].get_position().y) + _ghosts[0].get_position().y;
+				//std::cout << floor(_NewTarget.x / TILE_SIZE) << "   " << floor(_NewTarget.y / TILE_SIZE) << std::endl;
 				_ghosts[2].movement(_map, _NewTarget, New_pac.get_position());
 			}
 		}
@@ -84,7 +100,7 @@ void GhostController::GhostDraw(sf::RenderWindow& window) {
 	
 	_ghosts[0].draw(window, 0);
 		
-	_ghosts[1].draw(window, 1);
+	_ghosts[1].draw(window, 1); //есть id можно делать по нему
 		
 	_ghosts[2].draw(window, 2);
 }

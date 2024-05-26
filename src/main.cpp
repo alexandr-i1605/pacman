@@ -10,6 +10,8 @@
 #include "Actors/GhostControl.hpp"
 #include "map.hpp"
 
+//с синим все ок, он просыпается, когда 1/3 съедена
+
 int main() {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "pacman");
     window.setVerticalSyncEnabled(false);

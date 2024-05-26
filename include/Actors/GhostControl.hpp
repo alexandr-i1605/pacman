@@ -10,7 +10,7 @@
 
 class GhostController {
 private:
-	bool _Global_scary_mode;
+	short _Boost_pills_counter;
 	Position _NewTarget;
 	Map _map;
 	std::array<Ghost, 3> _ghosts;

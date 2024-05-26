@@ -13,8 +13,7 @@ private:
 	Position _Banned1 = { 14 * TILE_SIZE,9 * TILE_SIZE };
 	Position _Banned2 = { 4 * TILE_SIZE,9 * TILE_SIZE };
 	Position _scatter;
-
-	short Ghost_mode = 0; //1 за пакменом, 0 в угол
+	bool Ghost_mode = 1; //1 за пакменом, 0 в угол
 public:
 	Ghost(short id, short start_position_x = 0, short start_position_y = 0, short direction = -1, short speed = 1, unsigned short ScatterX = 0,  unsigned short ScaterY = 0);
 	float get_dist_targ(short tragetx, short targety);//âîçâðàùàåò ðàññòîÿíèå äî öåëè 
@@ -23,6 +22,7 @@ public:
 	bool finish_g(Position Target);
 	void movement(Map& map, const Position Target, Position pacman);
 	void GhostGetTarget(Position pacman, std::vector<bool> collisions);
+	void set_scarry_mode(bool Ghost_Mode);
 	short get_speed(); //по-хорошему сделать не типа инт, а другого
 	void draw(sf::RenderWindow& window, short n);
 	bool check_door();

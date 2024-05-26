@@ -7,6 +7,6 @@ class Pacman :public BaseActor {
 public:
 	Pacman(short start_position_x = 0, short start_position_y = 0, short direction = -1, short speed = 2);
 	short get_direction();
-	virtual void movement(Map& map);
+	void movement(Map& map);
 	void draw(sf::RenderWindow& window);
 };
