@@ -22,7 +22,6 @@ void Pacman::movement(Map& map) {
 	collisions[2] = map.check_collision(_position.x, _position.y + _speed);
 	collisions[3] = map.check_collision(_position.x - _speed,  _position.y);
 
-	//std::cout << _direction << std::endl;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		if (!collisions[0]) {
 			_direction = 0;
@@ -96,6 +95,5 @@ void Pacman::draw(sf::RenderWindow& window) {
 }
 
 short Pacman::get_direction() {
-	//std::cout << _direction << std::endl;
 	return _direction;
 }

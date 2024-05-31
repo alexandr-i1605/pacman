@@ -34,7 +34,4 @@ public:
 	void set_door(bool n);
 	virtual void draw(sf::RenderWindow& window) override;
 	bool check_door();
-	//Position get_scater();
-	//std::vector<bool> get_collision(Map map);
-
 };

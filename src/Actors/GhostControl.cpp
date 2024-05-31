@@ -49,7 +49,7 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 			}
 			else {
 				_ghosts[0].movement(_map, New_pac.get_position(), New_pac.get_position());
-				//std::cout << New_pac.get_position().x / TILE_SIZE<<"  " << New_pac.get_position().y / TILE_SIZE <<std::endl; //красный призрак
+				
 			}
 		}
 

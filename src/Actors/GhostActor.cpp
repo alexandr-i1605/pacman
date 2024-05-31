@@ -176,9 +176,7 @@ void Ghost::movement(Map& map, Position Target, Position pacman) {
 		else if (this->finish_g(pacman)) {
 			Ghost_mode = 2;
 			Ghost::GhostGetTarget(_door_cord, collisions);
-			//this->set_speed(4);
 			_door = 0; //мб убрать
-			std::cout << "nig";
 		}
 		else {
 			Ghost::GhostGetTarget(_scatter, collisions);
@@ -194,13 +192,10 @@ void Ghost::movement(Map& map, Position Target, Position pacman) {
 			_position.x = -TILE_SIZE + 2;
 		}
 	}
-	/*std::cout << floor(_position.x / TILE_SIZE) << " " << floor(_position.y/ TILE_SIZE) << "      ";
-	std::cout << floor(pacman.x/ TILE_SIZE) << " " << floor(pacman.y/ TILE_SIZE) << "\n";*/
 }
 
 bool Ghost::finish_g(Position Target) {
 	if (get_dist_targ(Target.x, Target.y) <= TILE_SIZE) {
-		std::cout << "nigger"<<rand()%10<<"\n";
 	    return 1;
 	}
 	else {
