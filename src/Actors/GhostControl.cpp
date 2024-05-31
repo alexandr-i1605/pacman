@@ -114,7 +114,6 @@ void GhostController::GhostTargets(Map map, Pacman New_pac) {
 		}
 	}
 	_Scarrry_timer++;
-	std::cout << _Scarrry_timer<<"    " << _ghosts[0].get_ghost_mode() <<"     " << _ghosts[0].check_door()<< std::endl;
 }
 
 void GhostController::GhostDraw(sf::RenderWindow& window) {
